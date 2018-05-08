@@ -1,0 +1,31 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Transform" : "AWS::Serverless-2016-10-31",
+  "Description" : "AWS Serverless API that exposes the add, remove and get operations for a blogging platform using Amazon DynamoDB.",
+
+  "Resources" : {
+
+	"StartTask" : {
+		"Type" :"AWS::Serverless::Function",
+		"Properties":{
+			"Handler":"LambdaFramework::KFrameServer.Functions::StartTask",
+			"Runtime":"dotnetcore2.0",
+			"CodeUri":"",
+			"Description":"タスクを起動する",
+			"MemorySize" : 256,
+			"Timeout":30,
+			"Role":null,
+			"Policies":["AWSLambdaFullAccess"],
+			"Events":{
+			  "PutResource":{
+			    "Type" : "Api",
+				"Properties":{
+				 "Path":"/",
+				 "Method":"POST"
+				}
+			  }
+			}
+		}
+	}
+  }
+}
