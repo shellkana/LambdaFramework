@@ -19,9 +19,10 @@ namespace Blogger
             JsPath = "blogger/helloworld.view.js";
             var search = _dynamoDBContext.ScanAsync<Comment>(null);
             var page = await search.GetNextSetAsync();
+            page.Sort((a, b) => { return b.TimeStamp.CompareTo(a.TimeStamp); });
             string json = JsonConvert.SerializeObject(page);
             await loadJs();
-            ExecJs = ExecJs.Replace("JSON", json.Replace("\\\"", "”").Replace("\"", "\\\""));
+            ExecJs = ExecJs.Replace("JSON", json.Replace("\"", "\\\""));
         }
     }
 }

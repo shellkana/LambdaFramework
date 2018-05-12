@@ -49,6 +49,7 @@ namespace KFrameServer
         protected virtual async Task loadJs()
         {
             HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
             HttpResponseMessage response = await client.GetAsync("https://shellkana.github.io/static_web_site/application/" + JsPath);
             string result = await response.Content.ReadAsStringAsync();
             ExecJs = result.Replace(Environment.NewLine, "").Replace("\"", "\\\"");
