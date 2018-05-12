@@ -1,7 +1,7 @@
 ﻿using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
-using Blogger;
+using Sample;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +10,6 @@ namespace KFrameServer
     public partial class ApiDefine
     {
         public const string COMMENT_TABLE_NAME = "CommentTable";
-        public const string BLOG_TABLE_NAME = "BlogTable";
 
 
         /// <summary>
@@ -21,7 +20,8 @@ namespace KFrameServer
             tableDictionary.Add(COMMENT_TABLE_NAME, typeof(Comment));
 
             classDictionary.Add("LoadIndex", typeof(LoadIndexTask));
-            classDictionary.Add("AddComment", typeof(AddCommentTask));
+            ClassDictionary.Add("sample/LoadIndex", typeof(Sample.LoadIndexTask));
+            classDictionary.Add("sample/AddComment", typeof(AddCommentTask));
         }
     }
 }

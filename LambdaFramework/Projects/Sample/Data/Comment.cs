@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blogger
+namespace Sample
 {
     public class Comment
     {

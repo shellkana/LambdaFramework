@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blogger
+namespace KFrameServer
 {
     /// <summary>
     /// ロードインデックスタスク
@@ -16,11 +16,12 @@ namespace Blogger
         public override async Task Start(string _postJson, IDynamoDBContext _dynamoDBContext)
         {
             await base.Start(_postJson, _dynamoDBContext);
-            JsPath = "blogger/helloworld.view.js";
-            var search = _dynamoDBContext.ScanAsync<Comment>(null);
-            var page = await search.GetNextSetAsync();
-            page.Sort((a, b) => { return b.TimeStamp.CompareTo(a.TimeStamp); });
-            string json = JsonConvert.SerializeObject(page);
+            JsPath = "index.view.js";
+            List<string> projects = new List<string>()
+            {
+                "sample"
+            };
+            var json = JsonConvert.SerializeObject(projects);
             await loadJs();
             ExecJs = ExecJs.Replace("JSON", json.Replace("\"", "\\\""));
         }
