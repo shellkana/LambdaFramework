@@ -50,7 +50,7 @@ namespace KFrameServer
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
-            HttpResponseMessage response = await client.GetAsync("https://shellkana.github.io/static_web_site/application/" + JsPath);
+            HttpResponseMessage response = await client.GetAsync("https://shellkana.github.io/static_web_site/application/" + JsPath + "?" + Guid.NewGuid().ToString("N").Substring(0, 10));
             string result = await response.Content.ReadAsStringAsync();
             ExecJs = result.Replace(Environment.NewLine, "").Replace("\"", "\\\"");
 

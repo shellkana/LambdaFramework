@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KFrameServer
+namespace Cognito
 {
     /// <summary>
     /// ロードインデックスタスク
@@ -16,15 +16,8 @@ namespace KFrameServer
         public override async Task Start(string _postJson, IDynamoDBContext _dynamoDBContext)
         {
             await base.Start(_postJson, _dynamoDBContext);
-            JsPath = "index.view.js";
-            List<string> projects = new List<string>()
-            {
-                "sample",
-                "cognito"
-            };
-            var json = JsonConvert.SerializeObject(projects);
+            JsPath = "cognito/index.view.js";
             await loadJs();
-            ExecJs = ExecJs.Replace("JSON", json.Replace("\"", "\\\""));
         }
     }
 }
